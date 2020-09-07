@@ -50,15 +50,35 @@ public class CelestialBody {
 		myFileName = b.getName();
 	}
 
+	/**
+	 * Getter method: gets the instance variable myXPos
+	 * and returns x-position of this body.
+	 * @return value of x-position.
+	 */
+
 	public double getX() {
 		// TODO: complete method
 
 		return myXPos;
 	}
+
+	/**
+	 * Getter method: gets the instance variable myYPos
+	 * and returns y-position of this body.
+	 * @return value of y-position.
+	 */
+
 	public double getY() {
 		// TODO: complete method
 		return myYPos;
 	}
+
+	/**
+	 * Getter method: gets the instance variable myXVel
+	 * and returns x-velocity of this body.
+	 * @return value of x-velocity.
+	 */
+
 	public double getXVel() {
 		// TODO: complete method
 		return myXVel;
@@ -71,11 +91,24 @@ public class CelestialBody {
 		// TODO: complete method
 		return myYVel;
 	}
-	
+
+	/**
+	 * Getter method: gets the instance variable myMass
+	 * and returns mass of this body
+	 * @return value of mass
+	 */
+
 	public double getMass() {
 		// TODO: complete method
 		return myMass;
 	}
+
+	/**
+	 * Getter method: gets the instance variable myFileName
+	 * and returns filename of this body
+	 * @return value of filename (String)
+	 */
+
 	public String getName() {
 		// TODO: complete method
 		return myFileName;
@@ -91,19 +124,46 @@ public class CelestialBody {
 		return Math.sqrt ( (myXPos - b.getX()) * (myXPos - b.getX()) + (myYPos - b.getY()) * (myYPos - b.getY()));
 	}
 
+
+	/**
+	 * Return the force exerted by this body and another
+	 * @param b the other body to which force is calculated
+	 * @return force exerted between this body and b
+	 */
+
 	public double calcForceExertedBy(CelestialBody b) {
 		double G = 6.67*1e-11;
 		return (G * (b.getMass()) * myMass / (calcDistance(b) * calcDistance(b)));
 	}
 
+	/**
+	 * Return the x-force exerted by this body and another
+	 * @param b the other body to which x-force is calculated
+	 * @return force in x direction exerted between this body and b
+	 */
+
 	public double calcForceExertedByX(CelestialBody b) {
 		// TODO: complete method
 		return (calcForceExertedBy(b) * (b.getX() - myXPos) / (calcDistance(b)));
 	}
+
+	/**
+	 * Return the y-force exerted by this body and another
+	 * @param b the other body to which y-force is calculated
+	 * @return force in y direction exerted between this body and b
+	 */
+
 	public double calcForceExertedByY(CelestialBody b) {
 		// TODO: complete method
 		return (calcForceExertedBy(b) * (b.getY() - myYPos) / (calcDistance(b)));
 	}
+
+	/**
+	 * Return the net x-force exerted by this body and another
+	 * Adds all x-forces exerted by each body with respect to another
+	 * @param bodies all bodies to calculate x-force
+	 * @return sum of x-force exerted by each body and b
+	 */
 
 	public double calcNetForceExertedByX(CelestialBody[] bodies) {
 		// TODO: complete method
@@ -116,6 +176,14 @@ public class CelestialBody {
 		return sum;
 	}
 
+
+	/**
+	 * Return the net y-force exerted by this body and another
+	 * Adds all y-forces exerted by each body with respect to another
+	 * @param bodies all bodies to calculate y-force
+	 * @return sum of y-force exerted by each body and b
+	 */
+
 	public double calcNetForceExertedByY(CelestialBody[] bodies) {
 		double sum = 0.0;
 		for (CelestialBody b : bodies) {
@@ -125,6 +193,14 @@ public class CelestialBody {
 		}
 		return sum;
 	}
+
+	/**
+	 * Updates the values for instance variables (position and velocity) in order to
+	 * make the simulation run
+	 * @param deltaT time step to update position and velocity
+	 * @param xforce net x-forces on this body by all other bodies
+	 * @param yforce net y-forces on this body by all other bodies
+	 */
 
 	public void update(double deltaT, 
 			           double xforce, double yforce) {
